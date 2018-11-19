@@ -1,0 +1,7 @@
+export * from './AuthLoading'
+export * from './SearchUcCode'
+export * from './Home'
+export * from './Login'
+export * from './Opinion'
+export * from './Payments'
+export * from './UpdateRegister'
