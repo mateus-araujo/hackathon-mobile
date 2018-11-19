@@ -4,9 +4,7 @@ import IconF from 'react-native-vector-icons/FontAwesome'
 import IconF5 from 'react-native-vector-icons/FontAwesome5'
 import IconM from 'react-native-vector-icons/MaterialIcons'
 import IconO from 'react-native-vector-icons/Octicons'
-import { connect } from 'react-redux'
 
-import { logoutUser } from '../store/actions'
 import { colors, fonts, metrics } from '../styles'
 
 const youngManAvatar = require('../images/young-man-avatar.png')
@@ -36,6 +34,11 @@ class SideBar extends Component {
   async componentWillMount() {
     const user = await AsyncStorage.getItem('@Enel:user')
     this.setState({ user })
+  }
+
+  logoutUser() {
+    AsyncStorage.clear()
+    navigation.navigate('Login')
   }
 
   render() {
@@ -95,7 +98,7 @@ class SideBar extends Component {
               },
               {
                 text: 'Sair',
-                onPress: () => this.props.logoutUser()
+                onPress: () => this.logoutUser()
               },
             ],
             { cancelable: false }
@@ -182,12 +185,4 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = ({ auth }) => {
-  const { user } = auth
-
-  return { user }
-}
-
-const _SideBar = connect(mapStateToProps, { logoutUser })(SideBar)
-
-export { _SideBar as SideBar }
+export { SideBar }
